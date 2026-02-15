@@ -1,17 +1,17 @@
 
 import React, { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Trending from './components/Trending';
-import Collection from './components/Collection';
-import Footer from './components/Footer';
-import StylistChat from './components/StylistChat';
-import About from './components/About';
-import Contact from './components/Contact';
-import { Privacy, Terms } from './components/Legal';
-import TrendingLooks from './components/TrendingLooks';
-import PinterestFeed from './components/PinterestFeed';
-import SideDrawer from './components/SideDrawer';
+import Navbar from './components/Navbar.tsx';
+import Hero from './components/Hero.tsx';
+import Trending from './components/Trending.tsx';
+import Collection from './components/Collection.tsx';
+import Footer from './components/Footer.tsx';
+import StylistChat from './components/StylistChat.tsx';
+import About from './components/About.tsx';
+import Contact from './components/Contact.tsx';
+import { Privacy, Terms } from './components/Legal.tsx';
+import TrendingLooks from './components/TrendingLooks.tsx';
+import PinterestFeed from './components/PinterestFeed.tsx';
+import SideDrawer from './components/SideDrawer.tsx';
 
 export type Page = 'home' | 'products' | 'about' | 'contact' | 'privacy' | 'terms';
 

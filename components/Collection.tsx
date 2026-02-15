@@ -1,7 +1,7 @@
 
 import React from 'react';
-import ProductCard from './ProductCard';
-import { PRODUCTS } from '../constants';
+import ProductCard from './ProductCard.tsx';
+import { PRODUCTS } from '../constants.ts';
 
 interface CollectionProps {
   isPreview?: boolean;
@@ -32,14 +32,6 @@ const Collection: React.FC<CollectionProps> = ({ isPreview }) => {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
-        
-        {!isPreview && (
-          <div className="mt-20 pt-10 border-t border-gray-100 dark:border-gray-800 text-center">
-            <p className="text-[10px] uppercase tracking-widest text-gray-300 dark:text-gray-600">
-              * Add new products to constants.ts to expand this collection.
-            </p>
-          </div>
-        )}
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { INSPIRATION_PINS } from '../constants';
+import { INSPIRATION_PINS } from '../constants.ts';
 
 const categories = ['All', 'Men Fashion', 'Women Fashion', 'Streetwear', 'Minimal Style'] as const;
 
@@ -78,12 +78,6 @@ const TrendingLooks: React.FC = () => {
               </div>
             </a>
           ))}
-        </div>
-
-        <div className="mt-16 text-center">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-gray-400">
-            * Simply add pin URLs and IDs to INSPIRATION_PINS in constants.ts
-          </p>
         </div>
       </div>
     </section>

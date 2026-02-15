@@ -23,31 +23,40 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setPage, onMenuOpen }) => 
     `hover:text-[#D4AF37] transition-colors ${currentPage === page ? 'text-[#D4AF37]' : ''}`;
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-      scrolled || currentPage !== 'home' ? 'bg-gic-light/95 dark:bg-gic-dark/95 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-8'
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ${
+      scrolled || currentPage !== 'home' 
+      ? 'bg-gic-light/90 dark:bg-gic-dark/90 backdrop-blur-xl py-4 shadow-[0_4px_30px_rgba(0,0,0,0.03)]' 
+      : 'bg-transparent py-10'
     }`}>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-gic-charcoal dark:text-white">
-        <div className="flex space-x-8 text-xs font-semibold uppercase tracking-[0.2em] hidden lg:flex">
+      <div className="max-w-7xl mx-auto px-8 flex justify-between items-center text-gic-charcoal dark:text-white">
+        <div className="flex space-x-10 text-[10px] font-bold uppercase tracking-[0.3em] hidden lg:flex">
           <button onClick={() => setPage('home')} className={navClass('home')}>Home</button>
-          <button onClick={() => setPage('products')} className={navClass('products')}>Products</button>
+          <button onClick={() => setPage('products')} className={navClass('products')}>Collections</button>
         </div>
         
         <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2">
-          <button onClick={() => setPage('home')} className="text-2xl md:text-3xl font-serif tracking-widest font-bold">GIC</button>
+          <button 
+            onClick={() => setPage('home')} 
+            className="text-2xl md:text-4xl font-serif tracking-[0.2em] font-bold transition-transform hover:scale-105 duration-500"
+          >
+            GIC
+          </button>
         </div>
 
-        <div className="flex items-center space-x-8">
-          <div className="hidden lg:flex space-x-8 text-xs font-semibold uppercase tracking-[0.2em]">
+        <div className="flex items-center space-x-10">
+          <div className="hidden lg:flex space-x-10 text-[10px] font-bold uppercase tracking-[0.3em]">
             <button onClick={() => setPage('about')} className={navClass('about')}>Journal</button>
             <button onClick={() => setPage('contact')} className={navClass('contact')}>Contact</button>
           </div>
           
           <button 
             onClick={onMenuOpen}
-            className="p-2 hover:text-gic-gold transition-colors"
+            className="relative group p-2 flex flex-col items-end space-y-1.5 focus:outline-none"
             aria-label="Open Menu"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <span className="w-6 h-[1px] bg-gic-charcoal dark:bg-white transition-all duration-500 group-hover:w-8 group-hover:bg-gic-gold"></span>
+            <span className="w-8 h-[1px] bg-gic-charcoal dark:bg-white transition-all duration-500 group-hover:w-5 group-hover:bg-gic-gold"></span>
+            <span className="w-4 h-[1px] bg-gic-charcoal dark:bg-white transition-all duration-500 group-hover:w-8 group-hover:bg-gic-gold"></span>
           </button>
         </div>
       </div>

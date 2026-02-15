@@ -20,21 +20,17 @@ const PinterestFeed: React.FC = () => {
     // Re-build Pinterest widgets when component mounts.
     const reBuildWidget = () => {
       try {
-        // More robust check for external script object to avoid "Script error"
-        // if the third-party pinit.js fails to load or encounters CORS issues.
         const globalWindow = window as any;
         if (globalWindow.PinUtils && typeof globalWindow.PinUtils.build === 'function') {
           globalWindow.PinUtils.build();
         }
       } catch (e) {
-        // Silently handle third-party script errors to prevent them from bubbling up
-        // and appearing as generic "Script error" in the main application context.
         console.debug('Pinterest widget initialization deferred:', e);
       }
     };
 
-    // Delay initialization to accommodate async defer loading of the external script
-    const timer = setTimeout(reBuildWidget, 1200);
+    // Increased delay slightly to ensure the larger container is fully rendered
+    const timer = setTimeout(reBuildWidget, 1500);
     
     return () => {
       clearTimeout(timer);
@@ -45,64 +41,68 @@ const PinterestFeed: React.FC = () => {
   return (
     <section 
       id="pinterest-feed-section"
-      className={`py-[120px] bg-[#faf9f7] transition-all duration-[1500ms] ease-out transform ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
+      className={`py-[160px] bg-[#faf9f7] dark:bg-gic-dark transition-all duration-[1500ms] ease-out transform ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
       }`}
     >
-      <div className="max-w-[1100px] mx-auto px-5">
-        {/* Editorial Header Section */}
-        <div className="text-center mb-[60px]">
-          <h2 className="text-4xl md:text-5xl font-serif mb-6 tracking-tight text-[#1A1A1A] leading-tight">
-            Discover Trending Styles
-          </h2>
-          <p className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-[#D4AF37] font-bold">
-            Curated Fashion Picks from GIC
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Editorial Header Section - Scaled Up */}
+        <div className="text-center mb-20">
+          <p className="text-[11px] md:text-xs uppercase tracking-[0.6em] text-[#D4AF37] font-bold mb-6">
+            Global Style Inspiration
           </p>
-          <div className="h-[1px] w-20 bg-[#D4AF37]/40 mx-auto mt-10 shadow-sm"></div>
+          <h2 className="text-5xl md:text-7xl font-serif mb-8 tracking-tighter text-[#1A1A1A] dark:text-white leading-tight">
+            The Digital <span className="italic font-normal">Moodboard</span>
+          </h2>
+          <div className="h-[1.5px] w-24 bg-[#D4AF37]/60 mx-auto mt-12 shadow-sm"></div>
         </div>
 
-        {/* Premium Pinterest Card Container */}
-        <div className="bg-white rounded-[12px] p-8 md:p-10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.03)] border border-gray-100/50 transition-all duration-700">
+        {/* Expansive Pinterest Card Container */}
+        <div className="bg-white dark:bg-gic-charcoal/50 rounded-[16px] p-6 md:p-12 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.06)] border border-gray-100/50 dark:border-white/5 transition-all duration-700">
           <div className="flex justify-center w-full">
             {/* 
-              Standardizing the container with precise Pinterest data attributes.
-              Centered layout with sufficient padding for an airy, luxurious feel.
+              Standardizing the container with significantly larger Pinterest data attributes.
+              Board width increased to 1200 and height to 600 for a massive grid look.
             */}
-            <div className="w-full max-w-[900px] flex justify-center text-center overflow-hidden">
+            <div className="w-full max-w-[1200px] flex justify-center text-center overflow-hidden rounded-lg">
               <a 
                 data-pin-do="embedUser" 
-                data-pin-board-width="900" 
-                data-pin-scale-height="320" 
-                data-pin-scale-width="100" 
+                data-pin-board-width="1200" 
+                data-pin-scale-height="600" 
+                data-pin-scale-width="120" 
                 href="https://www.pinterest.com/gavandinfluencecollective/"
-                className="block min-h-[320px] w-full"
+                className="block min-h-[600px] w-full"
               >
-                {/* Minimalist loading state */}
-                <div className="py-24 flex flex-col items-center">
-                  <div className="w-8 h-8 border-[1px] border-[#D4AF37] border-t-transparent rounded-full animate-spin mb-4"></div>
-                  <span className="text-[10px] uppercase tracking-[0.4em] text-gray-300">Aesthetic Curation...</span>
+                {/* Enhanced loading state for the larger container */}
+                <div className="py-48 flex flex-col items-center bg-gray-50/30 dark:bg-black/10 rounded-xl">
+                  <div className="w-12 h-12 border-[1.5px] border-[#D4AF37] border-t-transparent rounded-full animate-spin mb-6"></div>
+                  <span className="text-[11px] uppercase tracking-[0.5em] text-gray-400 font-medium">Curating Aesthetic Trends...</span>
                 </div>
               </a>
             </div>
           </div>
         </div>
 
-        {/* Subtle Brand Signature */}
-        <div className="mt-16 text-center">
+        {/* Prominent External Navigation Link */}
+        <div className="mt-20 text-center">
           <a 
             href="https://www.pinterest.com/gavandinfluencecollective/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="group inline-flex items-center space-x-4 text-[10px] uppercase tracking-[0.4em] font-semibold text-gray-400 hover:text-[#D4AF37] transition-all duration-300"
+            className="group inline-flex flex-col items-center space-y-4"
           >
-            <span className="border-b border-transparent group-hover:border-[#D4AF37] pb-1">See all trends</span>
-            <svg 
-              className="w-4 h-4 opacity-40 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all" 
-              viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-            >
-              <line x1="7" y1="17" x2="17" y2="7"></line>
-              <polyline points="7 7 17 7 17 17"></polyline>
-            </svg>
+            <span className="text-[11px] uppercase tracking-[0.5em] font-bold text-gray-500 group-hover:text-[#D4AF37] transition-all duration-300 border-b border-gray-200 dark:border-gray-800 pb-2 group-hover:border-[#D4AF37]">
+              Visit Full Studio Profile
+            </span>
+            <div className="w-10 h-10 rounded-full border border-gray-100 dark:border-white/10 flex items-center justify-center group-hover:bg-[#D4AF37] group-hover:border-[#D4AF37] transition-all duration-500">
+               <svg 
+                className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" 
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+              >
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
           </a>
         </div>
       </div>
